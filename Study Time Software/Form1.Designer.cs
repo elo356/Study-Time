@@ -41,6 +41,8 @@ namespace Study_Time_Software
             this.RegistroMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.ConfigB = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ThemeCb = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.TmDescSecCb = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,11 +59,14 @@ namespace Study_Time_Software
             this.StudyTimer = new System.Windows.Forms.Timer(this.components);
             this.DescTimer = new System.Windows.Forms.Timer(this.components);
             this.RegistroGb = new System.Windows.Forms.GroupBox();
+            this.DgvRegistro = new System.Windows.Forms.DataGridView();
             this.InicioBox.SuspendLayout();
             this.Menu.SuspendLayout();
             this.ConfigB.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.RegistroGb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegistro)).BeginInit();
             this.SuspendLayout();
             // 
             // StopBtn
@@ -160,6 +165,8 @@ namespace Study_Time_Software
             // 
             // ConfigB
             // 
+            this.ConfigB.Controls.Add(this.label7);
+            this.ConfigB.Controls.Add(this.ThemeCb);
             this.ConfigB.Controls.Add(this.groupBox2);
             this.ConfigB.Controls.Add(this.SaveBtn);
             this.ConfigB.Controls.Add(this.groupBox1);
@@ -171,13 +178,31 @@ namespace Study_Time_Software
             this.ConfigB.TabIndex = 10;
             this.ConfigB.TabStop = false;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 201);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Tema";
+            // 
+            // ThemeCb
+            // 
+            this.ThemeCb.FormattingEnabled = true;
+            this.ThemeCb.Location = new System.Drawing.Point(45, 198);
+            this.ThemeCb.Name = "ThemeCb";
+            this.ThemeCb.Size = new System.Drawing.Size(121, 21);
+            this.ThemeCb.TabIndex = 8;
+            this.ThemeCb.SelectedIndexChanged += new System.EventHandler(this.ThemeCb_SelectedIndexChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.TmDescSecCb);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.TmDescMinCb);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(6, 100);
+            this.groupBox2.Location = new System.Drawing.Point(6, 89);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(188, 71);
             this.groupBox2.TabIndex = 7;
@@ -221,7 +246,7 @@ namespace Study_Time_Software
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(62, 226);
+            this.SaveBtn.Location = new System.Drawing.Point(63, 236);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(75, 23);
             this.SaveBtn.TabIndex = 7;
@@ -279,7 +304,7 @@ namespace Study_Time_Software
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 191);
+            this.label4.Location = new System.Drawing.Point(6, 174);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 5;
@@ -288,7 +313,7 @@ namespace Study_Time_Software
             // MusicCB
             // 
             this.MusicCB.FormattingEnabled = true;
-            this.MusicCB.Location = new System.Drawing.Point(45, 188);
+            this.MusicCB.Location = new System.Drawing.Point(45, 171);
             this.MusicCB.Name = "MusicCB";
             this.MusicCB.Size = new System.Drawing.Size(121, 21);
             this.MusicCB.TabIndex = 4;
@@ -305,11 +330,20 @@ namespace Study_Time_Software
             // 
             // RegistroGb
             // 
+            this.RegistroGb.Controls.Add(this.DgvRegistro);
             this.RegistroGb.Location = new System.Drawing.Point(0, 27);
             this.RegistroGb.Name = "RegistroGb";
             this.RegistroGb.Size = new System.Drawing.Size(251, 278);
             this.RegistroGb.TabIndex = 11;
             this.RegistroGb.TabStop = false;
+            // 
+            // DgvRegistro
+            // 
+            this.DgvRegistro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvRegistro.Location = new System.Drawing.Point(5, 13);
+            this.DgvRegistro.Name = "DgvRegistro";
+            this.DgvRegistro.Size = new System.Drawing.Size(240, 171);
+            this.DgvRegistro.TabIndex = 0;
             // 
             // Form1
             // 
@@ -340,6 +374,8 @@ namespace Study_Time_Software
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.RegistroGb.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegistro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,6 +409,9 @@ namespace Study_Time_Software
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer DescTimer;
         private System.Windows.Forms.GroupBox RegistroGb;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox ThemeCb;
+        private System.Windows.Forms.DataGridView DgvRegistro;
     }
 }
 

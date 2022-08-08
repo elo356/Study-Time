@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 namespace Study_Time_Software
 {
     //rgb(125, 66, 50) escala color fl
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         newTxtDb configDb = new newTxtDb();
       
@@ -22,7 +23,7 @@ namespace Study_Time_Software
         bool isPauseBtn= false;
         bool startDescTimer = false;
         bool timerRunning = false;
-
+        int themeIndex;
         public Form1()
         {
             InitializeComponent();
@@ -30,9 +31,43 @@ namespace Study_Time_Software
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StopBtn.Enabled = false;
             //crear config db
             configDb.createTxtFile("ConfigDb");
+            string[] configDbLines = configDb.ReadTxtLines("configDb");
+
+            //tema
+            Theme theme = new Theme(InicioBox, ConfigB, RegistroGb, Menu);
+
+            ThemeCb.Items.Add("Light Theme");
+            ThemeCb.Items.Add("Dark Theme");
+            ThemeCb.Items.Add("Lukthak Theme");
+            themeIndex = ThemeCb.SelectedIndex;
+
+            ThemeCb.SelectedIndex = int.Parse(configDbLines[6]);
+
+            switch (themeIndex)
+            {
+                case 0:
+                    {
+                        theme.LightTheme();
+                        this.BackColor = Control.DefaultBackColor;
+                        break;
+                    }
+                case 1:
+                    {
+                        theme.DarkTheme();
+                        this.BackColor = Color.DarkGray;
+                        break;
+                    }
+                case 2:
+                    {
+                        theme.LukthakTheme();
+                        this.BackColor = Color.FromArgb(125, 66, 50);
+                        break;
+                    }
+            }
+           
+            StopBtn.Enabled = false;
 
             ConfigB.Hide();
             RegistroGb.Hide();
@@ -45,7 +80,6 @@ namespace Study_Time_Software
                 TmDescSecCb.Items.Add(i.ToString());
             }
 
-            string[] configDbLines = configDb.ReadTxtLines("configDb");
             TmEstMinCb.SelectedIndex = int.Parse(configDbLines[1]);
             TmEstSecCb.SelectedIndex = int.Parse(configDbLines[2]);
             TmDescMinCb.SelectedIndex = int.Parse(configDbLines[3]);
@@ -57,8 +91,9 @@ namespace Study_Time_Software
             MusicCB.Items.Add("Tu Mujer");
             MusicCB.Items.Add("Hey");
             MusicCB.SelectedIndex = int.Parse(configDbLines[5]);
+            
         }
-   
+
         private void InicioMenu_Click_1(object sender, EventArgs e)
         {
             InicioBox.Show();
@@ -209,6 +244,9 @@ namespace Study_Time_Software
 
                 //guardar musica
                 lines[5] = MusicCB.SelectedIndex.ToString();
+
+                //guardar tema
+                lines[6] = ThemeCb.SelectedIndex.ToString();
                 //escribirlo
                 configDb.WriteInTxt("ConfigDb", lines);
             }
@@ -242,9 +280,32 @@ namespace Study_Time_Software
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ThemeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Theme theme = new Theme(InicioBox, ConfigB, RegistroGb, Menu);
 
+            themeIndex = ThemeCb.SelectedIndex;
+            switch (themeIndex)
+            {
+                case 0:
+                    {
+                        theme.LightTheme();
+                        this.BackColor = Control.DefaultBackColor;
+                        break;
+                    }
+                case 1:
+                    {
+                        theme.DarkTheme();
+                        this.BackColor = Color.DarkGray;
+                        break;
+                    }
+                case 2:
+                    {
+                        theme.LukthakTheme();
+                        this.BackColor = Color.FromArgb(125, 66, 50);
+                        break;
+                    }
+            }
         }
     }
 }

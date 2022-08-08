@@ -23,6 +23,7 @@ namespace Study_Time_Software
                 sw.WriteLine("5");
                 sw.WriteLine("0");
                 sw.WriteLine("0");
+                sw.WriteLine("0");
                 Console.WriteLine("archivo txt " + fileName + " creado");
                 sw.Close();
             }
