@@ -39,7 +39,6 @@ namespace Study_Time_Software
             this.InicioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ConfigMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RegistroMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
             this.ConfigB = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.ThemeCb = new System.Windows.Forms.ComboBox();
@@ -58,15 +57,12 @@ namespace Study_Time_Software
             this.MusicCB = new System.Windows.Forms.ComboBox();
             this.StudyTimer = new System.Windows.Forms.Timer(this.components);
             this.DescTimer = new System.Windows.Forms.Timer(this.components);
-            this.RegistroGb = new System.Windows.Forms.GroupBox();
-            this.DgvRegistro = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             this.InicioBox.SuspendLayout();
             this.Menu.SuspendLayout();
             this.ConfigB.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.RegistroGb.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvRegistro)).BeginInit();
             this.SuspendLayout();
             // 
             // StopBtn
@@ -153,15 +149,6 @@ namespace Study_Time_Software
             this.RegistroMenu.Size = new System.Drawing.Size(62, 20);
             this.RegistroMenu.Text = "Registro";
             this.RegistroMenu.Click += new System.EventHandler(this.RegistroMenu_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(173, 316);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "By: DevElop";
             // 
             // ConfigB
             // 
@@ -328,29 +315,20 @@ namespace Study_Time_Software
             this.DescTimer.Interval = 1000;
             this.DescTimer.Tick += new System.EventHandler(this.DescTimer_Tick);
             // 
-            // RegistroGb
+            // label2
             // 
-            this.RegistroGb.Controls.Add(this.DgvRegistro);
-            this.RegistroGb.Location = new System.Drawing.Point(0, 27);
-            this.RegistroGb.Name = "RegistroGb";
-            this.RegistroGb.Size = new System.Drawing.Size(251, 278);
-            this.RegistroGb.TabIndex = 11;
-            this.RegistroGb.TabStop = false;
-            // 
-            // DgvRegistro
-            // 
-            this.DgvRegistro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvRegistro.Location = new System.Drawing.Point(5, 13);
-            this.DgvRegistro.Name = "DgvRegistro";
-            this.DgvRegistro.Size = new System.Drawing.Size(240, 171);
-            this.DgvRegistro.TabIndex = 0;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(173, 316);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "By: DevElop";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(251, 338);
-            this.Controls.Add(this.RegistroGb);
             this.Controls.Add(this.ConfigB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Menu);
@@ -374,8 +352,6 @@ namespace Study_Time_Software
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.RegistroGb.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DgvRegistro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,7 +367,6 @@ namespace Study_Time_Software
         private System.Windows.Forms.ToolStripMenuItem InicioMenu;
         private System.Windows.Forms.ToolStripMenuItem ConfigMenu;
         private System.Windows.Forms.ToolStripMenuItem RegistroMenu;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox ConfigB;
         private System.Windows.Forms.ComboBox TmEstMinCb;
         private System.Windows.Forms.Label label1;
@@ -408,10 +383,9 @@ namespace Study_Time_Software
         private System.Windows.Forms.ComboBox TmDescMinCb;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Timer DescTimer;
-        private System.Windows.Forms.GroupBox RegistroGb;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox ThemeCb;
-        private System.Windows.Forms.DataGridView DgvRegistro;
+        private System.Windows.Forms.Label label2;
     }
 }
 

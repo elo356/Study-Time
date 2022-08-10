@@ -16,6 +16,7 @@ namespace Study_Time_Software
     public partial class Form1 : System.Windows.Forms.Form
     {
         newTxtDb configDb = new newTxtDb();
+        Form1 f;
       
         public int totalTime;
         public int totalDecTime;
@@ -31,12 +32,13 @@ namespace Study_Time_Software
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            f = this;
             //crear config db
             configDb.createTxtFile("ConfigDb");
             string[] configDbLines = configDb.ReadTxtLines("configDb");
 
             //tema
-            Theme theme = new Theme(InicioBox, ConfigB, RegistroGb, Menu);
+            Theme theme = new Theme(InicioBox, ConfigB, Menu, Timer, timeTxt, label2, label4, label7, groupBox1, groupBox2, f);
 
             ThemeCb.Items.Add("Light Theme");
             ThemeCb.Items.Add("Dark Theme");
@@ -50,19 +52,16 @@ namespace Study_Time_Software
                 case 0:
                     {
                         theme.LightTheme();
-                        this.BackColor = Control.DefaultBackColor;
                         break;
                     }
                 case 1:
                     {
                         theme.DarkTheme();
-                        this.BackColor = Color.DarkGray;
                         break;
                     }
                 case 2:
                     {
-                        theme.LukthakTheme();
-                        this.BackColor = Color.FromArgb(125, 66, 50);
+                        theme.LukthakTheme();       
                         break;
                     }
             }
@@ -70,7 +69,6 @@ namespace Study_Time_Software
             StopBtn.Enabled = false;
 
             ConfigB.Hide();
-            RegistroGb.Hide();
 
             for (int i = 0; i < 61; i++)
             {
@@ -91,25 +89,21 @@ namespace Study_Time_Software
             MusicCB.Items.Add("Tu Mujer");
             MusicCB.Items.Add("Hey");
             MusicCB.SelectedIndex = int.Parse(configDbLines[5]);
-            
         }
 
         private void InicioMenu_Click_1(object sender, EventArgs e)
         {
             InicioBox.Show();
             ConfigB.Hide();
-            RegistroGb.Hide();
         }
 
         private void ConfigMenu_Click(object sender, EventArgs e)
         {
             ConfigB.Show();
             InicioBox.Hide();
-            RegistroGb.Hide();
         }
         private void RegistroMenu_Click(object sender, EventArgs e)
         {
-            RegistroGb.Show();
             InicioBox.Hide();
             ConfigB.Hide();
         }
@@ -212,7 +206,6 @@ namespace Study_Time_Software
                 int seconds = int.Parse(TmDescSecCb.SelectedItem.ToString());
                 totalDecTime = (minutes * 60) + seconds;
                 DescTimer.Enabled = true;
-
             }
         }
 
@@ -282,7 +275,7 @@ namespace Study_Time_Software
 
         private void ThemeCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Theme theme = new Theme(InicioBox, ConfigB, RegistroGb, Menu);
+            Theme theme = new Theme(InicioBox, ConfigB, Menu, Timer, timeTxt, label2, label4, label7, groupBox1, groupBox2, f);
 
             themeIndex = ThemeCb.SelectedIndex;
             switch (themeIndex)
@@ -290,19 +283,17 @@ namespace Study_Time_Software
                 case 0:
                     {
                         theme.LightTheme();
-                        this.BackColor = Control.DefaultBackColor;
                         break;
                     }
                 case 1:
                     {
+                        this.BackColor = Color.FromArgb(54, 57, 63);
                         theme.DarkTheme();
-                        this.BackColor = Color.DarkGray;
                         break;
                     }
                 case 2:
                     {
                         theme.LukthakTheme();
-                        this.BackColor = Color.FromArgb(125, 66, 50);
                         break;
                     }
             }
