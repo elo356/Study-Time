@@ -13,6 +13,12 @@ using System.Windows.Forms;
 namespace Study_Time_Software
 {
     //rgb(125, 66, 50) escala color fl
+    /*           //-------------------------------registro----------------------------------
+            Registro registro = new Registro(SesionDGV);
+            registro.createFile("RegistroDB");
+            registro.writeColumnOnLoad();
+            registro.ImportTxtInDGV("RegistroDB");
+    */
     public partial class Form1 : System.Windows.Forms.Form
     {
         newTxtDb configDb = new newTxtDb();
