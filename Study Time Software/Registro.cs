@@ -12,12 +12,6 @@ namespace Study_Time_Software
     class Registro 
     {
         DataTable table;
-        DataGridView dgb;
-
-        public Registro(DataGridView dgb)
-        {
-            this.dgb = dgb;
-        }
 
         public void createFile(string fileName)
         {
@@ -26,7 +20,7 @@ namespace Study_Time_Software
                 StreamWriter sw = new StreamWriter(Application.StartupPath + "\\" + fileName + ".txt");
                 
                 string date = DateTime.Now.ToShortDateString();
-                sw.WriteLine("{0}    | 0:00   | 0:00",date);
+                sw.WriteLine("{0}   |    |  ",date);
                 Console.WriteLine("archivo txt " + fileName + " creado");
                 sw.Close();
             }
@@ -54,20 +48,20 @@ namespace Study_Time_Software
             }
         }
 
-        public void SaveDgvInTxt(string fileName)
+        public void SaveDgvInTxt(string fileName, DataGridView dgv)
         {
             TextWriter writer = new StreamWriter(Application.StartupPath + "\\" + fileName + ".txt");
-            for(int i = 0; i < dgb.Rows.Count - 1; i++)
+            for(int i = 0; i < dgv.Rows.Count - 1; i++)
             {
-                for(int l = 0; l < dgb.Columns.Count; l++)
+                for(int l = 0; l < dgv.Columns.Count; l++)
                 {
-                    if(l == dgb.Columns.Count - 1)
+                    if(l == dgv.Columns.Count - 1)
                     {
-                        writer.Write("\t" + dgb.Rows[i].Cells[l].Value.ToString());
+                        writer.Write("\t" + dgv.Rows[i].Cells[l].Value.ToString());
                     }
                     else
                     {
-                        writer.Write("\t" + dgb.Rows[i].Cells[l].Value.ToString() + "\t" + "|");
+                        writer.Write("\t" + dgv.Rows[i].Cells[l].Value.ToString() + "\t" + "|");
                     } 
                 }
                 writer.WriteLine("");
@@ -75,28 +69,44 @@ namespace Study_Time_Software
             writer.Close();
         }
 
-        public void writeColumnOnLoad()
+        public void writeColumnOnLoad(DataGridView dgv)
         {
             table = new DataTable();
             table.Columns.Add("Dia", typeof(string));
             table.Columns.Add("Tiempo de Estudio", typeof(string));
             table.Columns.Add("Tiempo de Descanso", typeof(string));
-            dgb.DataSource = table;
+            dgv.DataSource = table;
         }
 
-        public void DeleteSelectedRow()
+        public void DeleteSelectedRow(DataGridView dgb)
         {
             if(dgb.CurrentCell != null)
             {
                 int rowIndex = dgb.CurrentCell.RowIndex;
                 dgb.Rows.RemoveAt(rowIndex);
-                SaveDgvInTxt("RegistroDB");
+                SaveDgvInTxt("RegistroDB",dgb);
             }
             else
             {
                 MessageBox.Show("No puede borrar una celda vacia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
           
+        }
+        public void NewSesion(DataGridView dgv)
+        {
+            string date = DateTime.Now.ToShortDateString();
+            int rowI = dgv.Rows.Count - 2;
+
+            if (dgv.Rows[rowI].Cells[0].Value.ToString() != date)
+            {
+                MessageBox.Show("Nueva Sesion");
+                table.Rows.Add(date);
+                SaveDgvInTxt("RegistroDB",dgv);
+            }
+            else
+            {
+                MessageBox.Show("Sesion continuada");
+            }
         }
     }
 }

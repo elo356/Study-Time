@@ -71,7 +71,7 @@ namespace Study_Time_Software
             this.StopBtn.Name = "StopBtn";
             this.StopBtn.Size = new System.Drawing.Size(111, 49);
             this.StopBtn.TabIndex = 8;
-            this.StopBtn.Text = "Deneter";
+            this.StopBtn.Text = "Detener";
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.RestartBtn_Click);
             // 
@@ -340,7 +340,6 @@ namespace Study_Time_Software
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Study Time";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.InicioBox.ResumeLayout(false);
             this.InicioBox.PerformLayout();

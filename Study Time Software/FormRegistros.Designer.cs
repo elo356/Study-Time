@@ -38,26 +38,27 @@ namespace Study_Time_Software
             // DeleteRowBtn
             // 
             this.DeleteRowBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteRowBtn.Location = new System.Drawing.Point(298, 237);
+            this.DeleteRowBtn.Location = new System.Drawing.Point(131, 254);
             this.DeleteRowBtn.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteRowBtn.Name = "DeleteRowBtn";
-            this.DeleteRowBtn.Size = new System.Drawing.Size(73, 21);
+            this.DeleteRowBtn.Size = new System.Drawing.Size(107, 41);
             this.DeleteRowBtn.TabIndex = 13;
             this.DeleteRowBtn.Text = "Eliminar Sesion";
             this.DeleteRowBtn.UseVisualStyleBackColor = true;
+            this.DeleteRowBtn.Click += new System.EventHandler(this.DeleteRowBtn_Click);
             // 
             // SesionDGV
             // 
             this.SesionDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SesionDGV.Location = new System.Drawing.Point(12, 12);
             this.SesionDGV.Name = "SesionDGV";
-            this.SesionDGV.Size = new System.Drawing.Size(776, 210);
+            this.SesionDGV.Size = new System.Drawing.Size(345, 223);
             this.SesionDGV.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(722, 350);
+            this.label2.Location = new System.Drawing.Point(291, 284);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 14;
@@ -67,12 +68,15 @@ namespace Study_Time_Software
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 372);
+            this.ClientSize = new System.Drawing.Size(369, 306);
             this.Controls.Add(this.DeleteRowBtn);
             this.Controls.Add(this.SesionDGV);
             this.Controls.Add(this.label2);
+            this.MaximumSize = new System.Drawing.Size(385, 345);
+            this.MinimumSize = new System.Drawing.Size(385, 345);
             this.Name = "FormRegistros";
-            this.Text = "FormRegistros";
+            this.Text = "Registros";
+            this.Load += new System.EventHandler(this.FormRegistros_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SesionDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

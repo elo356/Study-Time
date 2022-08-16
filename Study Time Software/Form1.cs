@@ -14,10 +14,7 @@ namespace Study_Time_Software
 {
     //rgb(125, 66, 50) escala color fl
     /*           //-------------------------------registro----------------------------------
-            Registro registro = new Registro(SesionDGV);
-            registro.createFile("RegistroDB");
-            registro.writeColumnOnLoad();
-            registro.ImportTxtInDGV("RegistroDB");
+           
     */
     public partial class Form1 : System.Windows.Forms.Form
     {
@@ -110,8 +107,8 @@ namespace Study_Time_Software
         }
         private void RegistroMenu_Click(object sender, EventArgs e)
         {
-            InicioBox.Hide();
-            ConfigB.Hide();
+            FormRegistros fr = new FormRegistros();
+            fr.Show();
         }
 
         private void IPCBtn_Click(object sender, EventArgs e)
