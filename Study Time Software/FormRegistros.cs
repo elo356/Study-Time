@@ -20,9 +20,13 @@ namespace Study_Time_Software
 
         private void FormRegistros_Load(object sender, EventArgs e)
         {
+            string configFileName = "configDb";
+            string tableRegistrationFile = "RegistroTablaDB";
+            string dataRegistratacionFile = "RegistroDataDB";
+
             f = this;
             newTxtDb config = new newTxtDb();
-            string[] configDbLines = config.ReadTxtLines("configDb");
+            string[] configDbLines = config.ReadTxtLines(configFileName);
             int themeIndex = int.Parse(configDbLines[6]);
 
             switch (themeIndex)
@@ -47,17 +51,19 @@ namespace Study_Time_Software
                     }
             }
 
-            Registro registro = new Registro();
-            registro.createFile("RegistroDB");
-            registro.writeColumnOnLoad(SesionDGV);
-            registro.ImportTxtInDGV("RegistroDB");
-            registro.NewSesion(SesionDGV);
+            Registro registro = new Registro(SesionDGV,0,0,0,0);
+            registro.createTableFile(tableRegistrationFile);
+            registro.createDataFile(dataRegistratacionFile);
+            registro.writeColumnOnLoad();
+            registro.ImportTxtInDGV(tableRegistrationFile);
+            registro.VerifySesion(tableRegistrationFile);
+            registro.SetSesionEstTime(dataRegistratacionFile);
         }
 
         private void DeleteRowBtn_Click(object sender, EventArgs e)
         {
-            Registro registro = new Registro();
-            registro.DeleteSelectedRow(SesionDGV);
+            Registro registro = new Registro(SesionDGV,0, 0,0,0);
+            registro.DeleteSelectedRow();
         }
     }
 }

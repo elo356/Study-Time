@@ -12,8 +12,21 @@ namespace Study_Time_Software
     class Registro 
     {
         DataTable table;
+        DataGridView dgv;
+        int studyTimeMin;
+        int studyTimeSec;
+        int descTimeMin;
+        int descTimeSec;
 
-        public void createFile(string fileName)
+        public Registro(DataGridView dgv, int stm, int sts, int dtm, int dts)
+        {
+            this.dgv = dgv;
+            this.studyTimeMin = stm;
+            this.studyTimeSec = sts;
+            this.descTimeMin = dtm;
+            this.descTimeSec = dts;
+        }
+        public void createTableFile(string fileName)
         {
             if (File.Exists(Application.StartupPath + "\\" + fileName + ".txt") == false)
             {
@@ -22,6 +35,25 @@ namespace Study_Time_Software
                 string date = DateTime.Now.ToShortDateString();
                 sw.WriteLine("{0}   |    |  ",date);
                 Console.WriteLine("archivo txt " + fileName + " creado");
+                sw.Close();
+            }
+            else
+            {
+                Console.WriteLine("Archivo txt " + fileName + " ya existe");
+            }
+        }
+
+        public void createDataFile(string fileName)
+        {
+            if (File.Exists(Application.StartupPath + "\\" + fileName + ".txt") == false)
+            {
+                StreamWriter sw = new StreamWriter(Application.StartupPath + "\\" + fileName + ".txt");
+
+                sw.WriteLine("00");
+                sw.WriteLine("00");
+                sw.WriteLine("00");
+                sw.WriteLine("00");
+     
                 sw.Close();
             }
             else
@@ -48,7 +80,7 @@ namespace Study_Time_Software
             }
         }
 
-        public void SaveDgvInTxt(string fileName, DataGridView dgv)
+        public void SaveDgvInTxt(string fileName)
         {
             TextWriter writer = new StreamWriter(Application.StartupPath + "\\" + fileName + ".txt");
             for(int i = 0; i < dgv.Rows.Count - 1; i++)
@@ -69,7 +101,7 @@ namespace Study_Time_Software
             writer.Close();
         }
 
-        public void writeColumnOnLoad(DataGridView dgv)
+        public void writeColumnOnLoad()
         {
             table = new DataTable();
             table.Columns.Add("Dia", typeof(string));
@@ -78,13 +110,13 @@ namespace Study_Time_Software
             dgv.DataSource = table;
         }
 
-        public void DeleteSelectedRow(DataGridView dgb)
+        public void DeleteSelectedRow()
         {
-            if(dgb.CurrentCell != null)
+            if(dgv.CurrentCell != null)
             {
-                int rowIndex = dgb.CurrentCell.RowIndex;
-                dgb.Rows.RemoveAt(rowIndex);
-                SaveDgvInTxt("RegistroDB",dgb);
+                int rowIndex = dgv.CurrentCell.RowIndex;
+                dgv.Rows.RemoveAt(rowIndex);
+                SaveDgvInTxt("RegistroTablaDB");
             }
             else
             {
@@ -92,21 +124,35 @@ namespace Study_Time_Software
             }
           
         }
-        public void NewSesion(DataGridView dgv)
+        public void VerifySesion(string fileName)
         {
             string date = DateTime.Now.ToShortDateString();
             int rowI = dgv.Rows.Count - 2;
 
             if (dgv.Rows[rowI].Cells[0].Value.ToString() != date)
             {
-                MessageBox.Show("Nueva Sesion");
+                //nueva sesion
                 table.Rows.Add(date);
-                SaveDgvInTxt("RegistroDB",dgv);
+                SaveDgvInTxt(fileName);
             }
             else
             {
-                MessageBox.Show("Sesion continuada");
+                //sesion continuada
             }
+        }
+
+        public void SetSesionEstTime(string fileName)
+        {
+            string[] lines = File.ReadAllLines(fileName +".txt");
+            int rowI = dgv.Rows.Count - 2;
+            dgv.Rows[rowI].Cells[1].Value = lines[0] + ":0" + lines[1];
+            SaveDgvInTxt("RegistroTablaDB");
+        }
+
+        public void SetSesionDescTime(string fileName)
+        {
+            string[] lines = File.ReadAllLines(fileName);
+
         }
     }
 }

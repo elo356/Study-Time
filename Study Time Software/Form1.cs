@@ -8,6 +8,7 @@ using System.Media;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Study_Time_Software
@@ -20,7 +21,7 @@ namespace Study_Time_Software
     {
         newTxtDb configDb = new newTxtDb();
         Form1 f;
-      
+        public string configFileName = "ConfigDb";
         public int totalTime;
         public int totalDecTime;
 
@@ -35,10 +36,13 @@ namespace Study_Time_Software
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            FormRegistros frg = new FormRegistros();
+            frg.Show();
+            frg.Close();
             f = this;
             //crear config db
-            configDb.createTxtFile("ConfigDb");
-            string[] configDbLines = configDb.ReadTxtLines("configDb");
+            configDb.createTxtFile(configFileName);
+            string[] configDbLines = configDb.ReadTxtLines(configFileName);
 
             //tema
             Theme theme = new Theme(InicioBox, ConfigB, Menu, Timer, timeTxt, label2, label4, label7, groupBox1, groupBox2, f);
@@ -181,6 +185,7 @@ namespace Study_Time_Software
 
         private void StudyTimer_Tick(object sender, EventArgs e)
         {
+
             if (totalTime > 0)
             {
                 totalTime--;
@@ -190,11 +195,27 @@ namespace Study_Time_Software
             }
             else
             {
+                int minutes = int.Parse(TmEstMinCb.SelectedItem.ToString());
+                int seconds = int.Parse(TmEstSecCb.SelectedItem.ToString());
+
                 StudyTimer.Stop();
                 Alarm alm = new Alarm();
                 alm.PlaySound(MusicCB);
                 IPCBtn.Text = "Iniciar";
                 timeTxt.Text = "0:00";
+
+                //guardar en registro de estudio
+                StudyTimer.Enabled = false;
+
+                string[] l = new string[5];
+                string[] lo = File.ReadAllLines("RegistroDataDb.txt");
+
+                l[0] = $"{int.Parse(lo[0]) + minutes}";
+                l[1] = $"{ int.Parse(lo[1]) + seconds}";
+                File.WriteAllLines("RegistroDataDb.txt",l);
+                FormRegistros frg = new FormRegistros();
+                frg.Show();
+                frg.Close();
                 MessageBox.Show("El tiempo de estudio se termino","Fin",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 alm.Stop();
                 timerRunning = false;
@@ -205,9 +226,9 @@ namespace Study_Time_Software
                 IPCBtn.Text = "Pausar";
                 isPauseBtn = true;
 
-                int minutes = int.Parse(TmDescMinCb.SelectedItem.ToString());
-                int seconds = int.Parse(TmDescSecCb.SelectedItem.ToString());
-                totalDecTime = (minutes * 60) + seconds;
+                int minutesD = int.Parse(TmDescMinCb.SelectedItem.ToString());
+                int secondsD = int.Parse(TmDescSecCb.SelectedItem.ToString());
+                totalDecTime = (minutesD * 60) + secondsD;
                 DescTimer.Enabled = true;
             }
         }
@@ -215,10 +236,10 @@ namespace Study_Time_Software
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             //crear      
-            configDb.createTxtFile("ConfigDb");
+            configDb.createTxtFile(configFileName);
 
             //leer
-            string[] lines = configDb.ReadTxtLines("configDb");
+            string[] lines = configDb.ReadTxtLines(configFileName);
 
             if (TmEstMinCb.SelectedItem == null || TmEstSecCb.SelectedItem == null || TmDescSecCb.SelectedItem == null || TmDescMinCb.SelectedItem == null)
             {
