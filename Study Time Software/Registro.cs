@@ -145,7 +145,7 @@ namespace Study_Time_Software
         {
             string[] lines = File.ReadAllLines(fileName +".txt");
             int rowI = dgv.Rows.Count - 2;
-            dgv.Rows[rowI].Cells[1].Value = lines[0] + ":0" + lines[1];
+            dgv.Rows[rowI].Cells[1].Value = lines[0] + ":" + lines[1];
             SaveDgvInTxt("RegistroTablaDB");
         }
 

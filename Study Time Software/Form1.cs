@@ -79,9 +79,17 @@ namespace Study_Time_Software
             for (int i = 0; i < 61; i++)
             {
                 TmEstMinCb.Items.Add(i.ToString());
-                TmEstSecCb.Items.Add(i.ToString());
                 TmDescMinCb.Items.Add(i.ToString());
-                TmDescSecCb.Items.Add(i.ToString());
+                if(i > 9)
+                {
+                    TmEstSecCb.Items.Add(i.ToString());
+                    TmDescSecCb.Items.Add(i.ToString());
+                }
+                else
+                {
+                    TmEstSecCb.Items.Add("0" + i.ToString());
+                    TmDescSecCb.Items.Add("0" + i.ToString());
+                }     
             }
 
             TmEstMinCb.SelectedIndex = int.Parse(configDbLines[1]);
@@ -208,10 +216,15 @@ namespace Study_Time_Software
 
                 string[] l = new string[5];
                 string[] lo = File.ReadAllLines("RegistroDataDb.txt");
-
+                minutes = 60;
+                int hour = minutes / 60;
+                int min = minutes % 60;
+            
+                Console.WriteLine(hour);
                 l[0] = $"{int.Parse(lo[0]) + minutes}";
                 l[1] = $"{ int.Parse(lo[1]) + seconds}";
                 File.WriteAllLines("RegistroDataDb.txt",l);
+                //----------------------------------------------------------------------
                 FormRegistros frg = new FormRegistros();
                 frg.Show();
                 frg.Close();
