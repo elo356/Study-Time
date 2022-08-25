@@ -36,14 +36,13 @@ namespace Study_Time_Software
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FormRegistros frg = new FormRegistros();
-            frg.Show();
-            frg.Close();
             f = this;
             //crear config db
             configDb.createTxtFile(configFileName);
             string[] configDbLines = configDb.ReadTxtLines(configFileName);
-
+            FormRegistros frg = new FormRegistros();
+            frg.Show();
+            frg.Close();
             //tema
             Theme theme = new Theme(InicioBox, ConfigB, Menu, Timer, timeTxt, label2, label4, label7, groupBox1, groupBox2, f);
 
