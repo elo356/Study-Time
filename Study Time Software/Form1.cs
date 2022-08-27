@@ -285,7 +285,6 @@ namespace Study_Time_Software
                 timeTxt.Text = minute.ToString() + ":" + second.ToString();
             }
             else
-            {
                 int minutes = int.Parse(TmEstMinCb.SelectedItem.ToString());
 
                 DescTimer.Enabled = false;
@@ -302,7 +301,8 @@ namespace Study_Time_Software
                 l[1] = lo[1];
 
                 File.WriteAllLines("RegistroDataDb.txt", l);
-                //---------------------------------------------------------
+                //-------------------------------------------------------
+            {--
                 DescTimer.Stop();
                 Alarm alm = new Alarm();
                 alm.PlaySound(MusicCB);
