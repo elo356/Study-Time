@@ -141,18 +141,13 @@ namespace Study_Time_Software
             }
         }
 
-        public void SetSesionEstTime(string fileName)
+        public void SetSesionTime(string fileName)
         {
             string[] lines = File.ReadAllLines(fileName +".txt");
             int rowI = dgv.Rows.Count - 2;
             dgv.Rows[rowI].Cells[1].Value = lines[0] + ":" + lines[1];
+            dgv.Rows[rowI].Cells[2].Value = lines[2] + ":" + lines[3];
             SaveDgvInTxt("RegistroTablaDB");
-        }
-
-        public void SetSesionDescTime(string fileName)
-        {
-            string[] lines = File.ReadAllLines(fileName);
-
         }
     }
 }

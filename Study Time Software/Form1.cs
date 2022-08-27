@@ -13,10 +13,6 @@ using System.Windows.Forms;
 
 namespace Study_Time_Software
 {
-    //rgb(125, 66, 50) escala color fl
-    /*           //-------------------------------registro----------------------------------
-           
-    */
     public partial class Form1 : System.Windows.Forms.Form
     {
         newTxtDb configDb = new newTxtDb();
@@ -80,16 +76,8 @@ namespace Study_Time_Software
             {
                 TmEstMinCb.Items.Add(i.ToString());
                 TmDescMinCb.Items.Add(i.ToString());
-                if(i > 9)
-                {
-                    TmEstSecCb.Items.Add(i.ToString());
-                    TmDescSecCb.Items.Add(i.ToString());
-                }
-                else
-                {
-                    TmEstSecCb.Items.Add("0" + i.ToString());
-                    TmDescSecCb.Items.Add("0" + i.ToString());
-                }     
+                TmEstSecCb.Items.Add(i.ToString());
+                TmDescSecCb.Items.Add(i.ToString());
             }
 
             TmEstMinCb.SelectedIndex = int.Parse(configDbLines[1]);
@@ -203,7 +191,6 @@ namespace Study_Time_Software
             else
             {
                 int minutes = int.Parse(TmEstMinCb.SelectedItem.ToString());
-                int seconds = int.Parse(TmEstSecCb.SelectedItem.ToString());
 
                 StudyTimer.Stop();
                 Alarm alm = new Alarm();
@@ -216,13 +203,15 @@ namespace Study_Time_Software
 
                 string[] l = new string[5];
                 string[] lo = File.ReadAllLines("RegistroDataDb.txt");
-                minutes = 60;
+                minutes = 128;
                 int hour = minutes / 60;
                 int min = minutes % 60;
-            
-                Console.WriteLine(hour);
-                l[0] = $"{int.Parse(lo[0]) + minutes}";
-                l[1] = $"{ int.Parse(lo[1]) + seconds}";
+
+                l[0] = $"{int.Parse(lo[0]) + hour}";    
+                l[1] = $"{int.Parse(lo[1]) + min}";
+                l[2] = lo[2].ToString();
+                l[3] = lo[3].ToString();
+               
                 File.WriteAllLines("RegistroDataDb.txt",l);
                 //----------------------------------------------------------------------
                 FormRegistros frg = new FormRegistros();
@@ -297,6 +286,23 @@ namespace Study_Time_Software
             }
             else
             {
+                int minutes = int.Parse(TmEstMinCb.SelectedItem.ToString());
+
+                DescTimer.Enabled = false;
+
+                string[] l = new string[5];
+                string[] lo = File.ReadAllLines("RegistroDataDb.txt");
+                minutes = 109;
+                int hour = minutes / 60;
+                minutes = minutes % 60;
+
+                l[2] = $"{int.Parse(lo[2]) + hour}";
+                l[3] = $"{int.Parse(lo[3]) + minutes}";
+                l[0] = lo[0];
+                l[1] = lo[1];
+
+                File.WriteAllLines("RegistroDataDb.txt", l);
+                //---------------------------------------------------------
                 DescTimer.Stop();
                 Alarm alm = new Alarm();
                 alm.PlaySound(MusicCB);

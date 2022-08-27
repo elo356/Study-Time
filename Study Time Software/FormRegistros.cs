@@ -57,7 +57,7 @@ namespace Study_Time_Software
             registro.writeColumnOnLoad();
             registro.ImportTxtInDGV(tableRegistrationFile);
             registro.VerifySesion(tableRegistrationFile);
-            registro.SetSesionEstTime(dataRegistratacionFile);
+            registro.SetSesionTime(dataRegistratacionFile);
         }
 
         private void DeleteRowBtn_Click(object sender, EventArgs e)
