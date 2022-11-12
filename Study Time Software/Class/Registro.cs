@@ -135,10 +135,6 @@ namespace Study_Time_Software
                 table.Rows.Add(date);
                 SaveDgvInTxt(fileName);
             }
-            else
-            {
-                //sesion continuada
-            }
         }
 
         public void SetSesionTime(string fileName)

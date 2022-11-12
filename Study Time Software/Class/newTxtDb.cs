@@ -10,6 +10,7 @@ namespace Study_Time_Software
 {
     class newTxtDb
     {
+        //This is a temporal txt database 
         StreamWriter sw;
 
         public void createTxtFile(string fileName)
